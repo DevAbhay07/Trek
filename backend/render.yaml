@@ -4,6 +4,7 @@ services:
     env: python
     region: singapore
     plan: free
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
     # 1 worker (in-memory state), gthread for long-lived MJPEG streams,
     # timeout=0 so streaming connections never get killed by gunicorn.
