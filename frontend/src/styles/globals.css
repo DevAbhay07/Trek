@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500;
+  }
+  
+  .btn-danger {
+    @apply bg-danger-600 text-white hover:bg-danger-700 focus:ring-danger-500;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500;
+  }
+  
+  .btn-link {
+    @apply bg-transparent text-primary-600 hover:text-primary-800 underline focus:ring-primary-500;
+  }
+  
+  .input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm;
+  }
+  
+  .input-error {
+    @apply border-danger-300 focus:ring-danger-500 focus:border-danger-500;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-soft border border-gray-200;
+  }
+  
+  .modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50;
+  }
+  
+  .modal-content {
+    @apply bg-white rounded-lg shadow-xl max-w-md w-full max-h-screen overflow-y-auto;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-primary-50 text-primary-700 border-r-2 border-primary-600;
+  }
+  
+  .notification {
+    @apply p-4 rounded-lg border-l-4 mb-4;
+  }
+  
+  .notification-success {
+    @apply bg-success-50 border-success-400 text-success-800;
+  }
+  
+  .notification-warning {
+    @apply bg-warning-50 border-warning-400 text-warning-800;
+  }
+  
+  .notification-error {
+    @apply bg-danger-50 border-danger-400 text-danger-800;
+  }
+  
+  .notification-info {
+    @apply bg-primary-50 border-primary-400 text-primary-800;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, theme('colors.primary.600'), theme('colors.primary.400'));
+  }
+  
+  .bg-gradient-success {
+    background: linear-gradient(135deg, theme('colors.success.600'), theme('colors.success.400'));
+  }
+  
+  .bg-gradient-warning {
+    background: linear-gradient(135deg, theme('colors.warning.600'), theme('colors.warning.400'));
+  }
+  
+  .bg-gradient-danger {
+    background: linear-gradient(135deg, theme('colors.danger.600'), theme('colors.danger.400'));
+  }
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded hover:bg-gray-400;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Loading animations */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Parking grid styles */
+.parking-slot {
+  @apply w-12 h-8 rounded border-2 cursor-pointer transition-all duration-200 flex items-center justify-center text-xs font-medium;
+}
+
+.parking-slot.available {
+  @apply bg-success-100 border-success-300 text-success-700 hover:bg-success-200;
+}
+
+.parking-slot.occupied {
+  @apply bg-danger-100 border-danger-300 text-danger-700;
+}
+
+.parking-slot.reserved {
+  @apply bg-warning-100 border-warning-300 text-warning-700;
+}
+
+.parking-slot.out-of-order {
+  @apply bg-gray-100 border-gray-300 text-gray-500;
+}
+
+.parking-slot.selected {
+  @apply ring-2 ring-primary-500 ring-offset-1;
+}
+
+/* Camera feed styles */
+.camera-feed {
+  @apply relative bg-black rounded-lg overflow-hidden;
+}
+
+.camera-overlay {
+  @apply absolute inset-0 pointer-events-none;
+}
+
+.detection-box {
+  @apply absolute border-2 border-primary-400;
+}
+
+.zone-boundary {
+  @apply absolute border-2 border-dashed border-warning-400;
+}
+
+/* Chart styles */
+.recharts-tooltip-wrapper {
+  @apply rounded-lg shadow-lg;
+}
+
+.recharts-tooltip-content {
+  @apply bg-white border border-gray-200 rounded-lg p-3;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 640px) {
+  .parking-slot {
+    @apply w-10 h-6 text-xs;
+  }
+  
+  .modal-content {
+    @apply mx-2;
+  }
+}

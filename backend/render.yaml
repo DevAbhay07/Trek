@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: park-prabandh-backend
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # 1 worker (in-memory state), gthread for long-lived MJPEG streams,
+    # timeout=0 so streaming connections never get killed by gunicorn.
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --worker-class gthread --threads 10 --timeout 0 app:app
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: MODEL_PATH
+        value: final_model.pt
+      - key: VIDEO_PATH_1
+        value: Parking_Lot_CCTV_1.mp4
+      - key: VIDEO_PATH_2
+        value: Parking_Lot_CCTV_2.1.mp4
+      - key: FRONTEND_URL
+        value: https://park-prabandh.netlify.app  # update after Netlify deploy

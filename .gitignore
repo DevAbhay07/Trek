@@ -1,0 +1,47 @@
+# ── Python / Backend ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+*.log
+
+# Backend secrets
+backend/.env
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.cache/
+
+# Frontend secrets (real keys live in Netlify dashboard)
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# ── ML model & large media (use Git LFS or upload to Render manually) ─────────
+backend/*.pt
+backend/*.mp4
+backend/*.avi
+backend/*.mov
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+nohup.out
+*.pid
