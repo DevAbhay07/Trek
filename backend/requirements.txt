@@ -7,4 +7,4 @@ gunicorn
 cvzone
 python-dotenv
 # Production WSGI worker (gthread mode for MJPEG streaming)
-eventlet==0.37.1
+eventlet==0.37.0
