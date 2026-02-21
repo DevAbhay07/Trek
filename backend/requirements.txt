@@ -2,9 +2,12 @@ flask
 flask-cors
 flask-socketio
 opencv-python-headless
-ultralytics
 gunicorn
 cvzone
 python-dotenv
-# Production WSGI worker (gthread mode for MJPEG streaming)
 eventlet==0.37.0
+# CPU-only torch to avoid 3GB CUDA downloads on Railway/Render
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu
+torchvision==0.17.2+cpu
+ultralytics==8.4.14
