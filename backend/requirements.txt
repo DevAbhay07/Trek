@@ -1,24 +1,10 @@
 flask
 flask-cors
 flask-socketio
+opencv-python-headless
+ultralytics==8.4.14
 gunicorn
 cvzone
 python-dotenv
 eventlet==0.37.0
-# CPU-only torch to avoid 3GB CUDA downloads on Railway/Render
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.2.2+cpu
-torchvision==0.17.2+cpu
-# Install ultralytics without its opencv-python (GUI) dependency
-ultralytics==8.4.14 --no-deps
-numpy
-matplotlib
-pillow
-pyyaml
-requests
-psutil
-polars
-scipy
-ultralytics-thop
-# Headless opencv LAST so it wins over any GUI version
-opencv-python-headless
+

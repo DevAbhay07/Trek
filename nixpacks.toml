@@ -1,8 +1,0 @@
-[phases.setup]
-nixPkgs = ["python312", "gcc"]
-
-[phases.build]
-cmds = [
-  "pip uninstall -y opencv-python || true",
-  "pip install --force-reinstall opencv-python-headless"
-]
