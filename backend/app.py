@@ -55,13 +55,13 @@ _system_metrics = {
 
 # --- Load Model Once (shared across all threads) ---
 print("\n--- Loading Shared YOLO Model ---")
+model = None
 try:
     model = YOLO(model_path)
     model.to('cpu')
     print("✅ Model Loaded into Memory.")
 except Exception as e:
-    print(f"❌ Error loading model: {e}")
-    sys.exit()
+    print(f"⚠️  Model not loaded (will use mock data): {e}")
 
 
 
@@ -88,6 +88,10 @@ def _sample_one_frame(path: str):
         return None
 
     frame = cv2.resize(frame, (640, 480))
+
+    if model is None:
+        return None
+
     results = model(frame, stream=False, verbose=False, conf=0.4)
 
     occupied = free = 0
@@ -187,18 +191,18 @@ def stream_logic(path: str):
         # Resize for faster inference
         img = cv2.resize(img, (640, 480))
 
-        results = model(img, stream=True, verbose=False, conf=0.4)
+        if model is not None:
+            results = model(img, stream=True, verbose=False, conf=0.4)
+            for r in results:
+                for box in r.boxes:
+                    cls   = int(box.cls[0])
+                    label = classNames[cls] if cls < len(classNames) else "Unknown"
+                    color = (0, 255, 0) if label == 'free_slot' else (0, 0, 255)
 
-        for r in results:
-            for box in r.boxes:
-                cls   = int(box.cls[0])
-                label = classNames[cls] if cls < len(classNames) else "Unknown"
-                color = (0, 255, 0) if label == 'free_slot' else (0, 0, 255)
-
-                x1, y1, x2, y2 = map(int, box.xyxy[0])
-                w, h = x2 - x1, y2 - y1
-                cvzone.cornerRect(img, (x1, y1, w, h), t=2, rt=0,
-                                  colorC=color, colorR=color)
+                    x1, y1, x2, y2 = map(int, box.xyxy[0])
+                    w, h = x2 - x1, y2 - y1
+                    cvzone.cornerRect(img, (x1, y1, w, h), t=2, rt=0,
+                                      colorC=color, colorR=color)
 
         ret, buffer = cv2.imencode('.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
         if not ret:
